@@ -1,0 +1,132 @@
+PRINTING STACK:
+xiao,teng,edward,kun,kar,joe,changjie,anthony,lawrence,stefan,philip,ryan,angelo,maaz,ahmar,oliver,zuoping,yishi,casablanca,yat,adolfas,manuel,stacy,huan,jiaxin,sebastain,rafael,zxc,aabb,a,bbaa,ccaabb
+
+printing buckets: 1
+Table [0] [97]:       bbaa,         a,casablanca
+Table [0] [98]:     ccaabb,      aabb
+Table [0] [99]:        zxc
+Table [0] [100]:     edward
+Table [0] [101]:   lawrence,  changjie,       joe
+Table [0] [103]:    zuoping,      teng
+Table [0] [105]:      yishi
+Table [0] [108]:     rafael,    manuel
+Table [0] [110]:  sebastain,    jiaxin,      huan,      ryan,    stefan,       kun
+Table [0] [111]:     angelo,      xiao
+Table [0] [112]:     philip
+Table [0] [114]:     oliver,     ahmar,       kar
+Table [0] [115]:    adolfas
+Table [0] [116]:        yat
+Table [0] [121]:      stacy,   anthony
+Table [0] [122]:       maaz
+
+printing buckets: 2
+Table [1] [32]:          a
+Table [1] [97]:       bbaa,      huan,      ryan,    stefan,      xiao,     ahmar,       kar,   adolfas,       yat,      maaz
+Table [1] [98]:     ccaabb,      aabb
+Table [1] [99]: casablanca,  lawrence,     stacy
+Table [1] [101]:     rafael,    manuel,    oliver
+Table [1] [104]:      yishi
+Table [1] [105]:   changjie, sebastain,    jiaxin,    philip
+Table [1] [108]:     angelo
+Table [1] [110]:    zuoping,      teng,   anthony
+Table [1] [111]:        joe
+Table [1] [114]:     edward
+Table [1] [117]:        kun
+Table [1] [120]:        zxc
+
+printing buckets: 3
+Table [0] [32]:          a
+Table [0] [97]:       maaz,    ccaabb,      aabb,     stacy,    rafael, sebastain,    edward
+Table [0] [98]:       bbaa
+Table [0] [101]:     angelo,      teng
+Table [0] [102]:     stefan,   adolfas
+Table [0] [105]:       xiao,   zuoping
+Table [0] [106]:   changjie,       joe
+Table [0] [107]:        kar,       kun
+Table [0] [108]:     philip
+Table [0] [109]:      ahmar
+Table [0] [110]: casablanca,  lawrence
+Table [0] [111]:    anthony
+Table [0] [115]:      yishi
+Table [0] [117]:       huan,    manuel
+Table [0] [118]:     oliver
+Table [0] [120]:     jiaxin
+Table [0] [121]:       ryan,       yat
+Table [0] [122]:        zxc
+
+printing buckets: 4
+Table [1] [32]:          a,       joe,       kar,       kun,       yat,       zxc
+Table [1] [97]:     ccaabb,      aabb,casablanca,    jiaxin
+Table [1] [98]:       bbaa
+Table [1] [101]:     stefan,  lawrence
+Table [1] [102]:     rafael
+Table [1] [103]:     angelo,  changjie
+Table [1] [104]:      ahmar,   anthony,      huan
+Table [1] [105]:     philip,     yishi,    oliver
+Table [1] [108]:    adolfas
+Table [1] [109]:       maaz
+Table [1] [110]:     manuel
+Table [1] [112]:    zuoping
+Table [1] [114]:       ryan
+Table [1] [116]:      stacy, sebastain,      teng
+Table [1] [119]:     edward
+Table [1] [120]:       xiao
+
+printing buckets: 5
+Table [0] [32]:          a,       joe,       kar,       kun,       yat,       zxc,      aabb,      bbaa,      huan,      maaz,      ryan,      teng,      xiao
+Table [0] [97]:     rafael,     ahmar,    manuel
+Table [0] [99]:     ccaabb
+Table [0] [100]:     edward
+Table [0] [104]:     philip
+Table [0] [105]:     jiaxin
+Table [0] [108]: casablanca,    oliver
+Table [0] [110]:     angelo,  changjie
+Table [0] [111]:    adolfas,   zuoping
+Table [0] [114]:   lawrence
+Table [0] [115]:      stacy, sebastain
+Table [0] [116]:     stefan,   anthony
+Table [0] [121]:      yishi
+
+printing buckets: 6
+Table [1] [32]:          a,       joe,       kar,       kun,       yat,       zxc,      aabb,      bbaa,      huan,      maaz,      ryan,      teng,      xiao,     ahmar,     stacy,     yishi
+Table [1] [97]:     angelo,  changjie, sebastain
+Table [1] [98]: casablanca
+Table [1] [99]:     ccaabb
+Table [1] [100]:    adolfas
+Table [1] [101]:     edward
+Table [1] [106]:     jiaxin
+Table [1] [109]:     manuel
+Table [1] [110]:    anthony
+Table [1] [111]:     oliver
+Table [1] [112]:     philip
+Table [1] [114]:     rafael
+Table [1] [115]:     stefan
+Table [1] [117]:    zuoping
+Table [1] [119]:   lawrence
+
+printing buckets: 7
+Table [0] [32]:          a,       joe,       kar,       kun,       yat,       zxc,      aabb,      bbaa,      huan,      maaz,      ryan,      teng,      xiao,     ahmar,     stacy,     yishi,    angelo,    ccaabb,    edward,    jiaxin,    manuel,    oliver,    philip,    rafael,    stefan
+Table [0] [97]: casablanca,   adolfas,   anthony,  lawrence
+Table [0] [98]:  sebastain
+Table [0] [104]:   changjie
+Table [0] [122]:    zuoping
+
+printing buckets: 8
+Table [1] [32]:          a,       joe,       kar,       kun,       yat,       zxc,      aabb,      bbaa,      huan,      maaz,      ryan,      teng,      xiao,     ahmar,     stacy,     yishi,    angelo,    ccaabb,    edward,    jiaxin,    manuel,    oliver,    philip,    rafael,    stefan,   adolfas,   anthony,   zuoping
+Table [1] [99]:   changjie
+Table [1] [101]:  sebastain
+Table [1] [108]:   lawrence
+Table [1] [115]: casablanca
+
+printing buckets: 9
+Table [0] [32]:          a,       joe,       kar,       kun,       yat,       zxc,      aabb,      bbaa,      huan,      maaz,      ryan,      teng,      xiao,     ahmar,     stacy,     yishi,    angelo,    ccaabb,    edward,    jiaxin,    manuel,    oliver,    philip,    rafael,    stefan,   adolfas,   anthony,   zuoping,  changjie,  lawrence
+Table [0] [97]: casablanca
+Table [0] [115]:  sebastain
+
+printing buckets: 10
+Table [1] [32]:          a,       joe,       kar,       kun,       yat,       zxc,      aabb,      bbaa,      huan,      maaz,      ryan,      teng,      xiao,     ahmar,     stacy,     yishi,    angelo,    ccaabb,    edward,    jiaxin,    manuel,    oliver,    philip,    rafael,    stefan,   adolfas,   anthony,   zuoping,  changjie,  lawrence, sebastain
+Table [1] [99]: casablanca
+
+printing buckets: 11
+Table [0] [0]:          a,       joe,       kar,       kun,       yat,       zxc,      aabb,      bbaa,      huan,      maaz,      ryan,      teng,      xiao,     ahmar,     stacy,     yishi,    angelo,    ccaabb,    edward,    jiaxin,    manuel,    oliver,    philip,    rafael,    stefan,   adolfas,   anthony,   zuoping,  changjie,  lawrence, sebastain,casablanca
+

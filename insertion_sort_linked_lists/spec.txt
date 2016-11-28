@@ -1,0 +1,113 @@
+Below is the specs for project 1.1, data file will be sent sortly.
+
+There are two parts in project 1, Part-1 (Project 1.1) and Part-2 (Project 1.2)
+
+Problem statement:
+Given a file contains a list of English common words and another file contains English text, your tasks are:
+(Part-1) Construct a linked list (in ascending order) for the common words.
+(Part-2) Construct a linked list (in ascending order) for words in the English text  file, without those common words.
+
++++ Below contains project 1.1 specs. +++
+
+************************
+Language: C++ and Java
+
+Due Date: C++ Soft copy: 9/6/2016 Monday before midnight
+Due Date: Java Soft copy: 9/6/2016 Monday before midnight
+
+Due Date: C++ Hard copy: 9/7/2016 Tuesday in class
+Due Date: Java Hard copy: 9/7/2016 Tuesday in class
+
+********************************
+
+I. Input:
+ - (input-1): a text file contains a list of English common words.
+  In C++, the name of input-1 should be in argv[1]
+  In Java, the name of input-1 should be in argv[0]
+
+  
+
+II. Outputs:  A sorted list of the words in input file
+  - (Output-1): a file contains your program's output.
+  In C++, the name of output-1 should be in argv[2]
+  In Java, the name of output-1 should be in argv[1]
+
+  The output format is given after the algorithm steps, below.
+
+
+********************************
+III. Data structure:
+
+  - A class listNode
+       friend linkedList
+- data (string)
+- count (int)
+- next (listNode*)
+- two constructors
+
+  - A class linkedList
+- listHead (listNode*)
+- one constructor // create a dummy listNode and let listHead points to it.
+- findSpot (data)
+- listInsert (Spot, newNode)  // insert newNode after Spot
+- printList // print the list from head to the end to the outFile
+        // see format after the algorithm steps
+**** Algorithm steps for linked list insertion sort:
+
+Step 0: prepare the skeleton of your program, including classes, etc.
+
+Step 1:  open inFile1 // common word file (You may assume there is no duplicate words)
+
+Step 2: CwordlistHead <-- make a new linked list by the list constructor
+
+step 3:  commonWord <-- read a word from inFile1
+
+step 4:  spot <-- findSpot(commonWord) // see algorithm steps below
+
+step 5:  newNode <--  make a new node for  commonWord
+
+step 6: call listInsert (Spot, newNode)  // you should know how to insert newNode after Spot
+
+step 7: call printList (C CwordlistHead)  // output to outfile1
+
+step 8: repeat step 3 to step 7 until the inFile1 is empty
+
+
+**** Algorithm steps for findSpot (listHead, data)
+
+Step 1: spot <-- listHead
+Step 2: if (spot.next != null) and spot.next.data < data
+            Spot <-- Spot.next
+Step 3: repeat step 2
+Step 4: return spot
+
+**** Output format ***
+
+        1)  printList will print the list from listHead to the end of the list, using the following format:
+
+listHead -->("dummy", word in next)-->(word,  word in next)->  ...... --> (word, null)
+
+
+For example,  if the common word file contains
+are I you of  a an
+
+Your output in the output file should be:
+
+Insert data (are):
+listHead --> (dummy, are) --> (are,  null)
+
+Insert data (I):
+listHead -->  (dummy, are) --> (are, I) --> (I, null)
+
+
+Insert data (you):
+listHead --> (dummy, are) --> (are, I) --> (I, you) --> (you, null)
+
+Insert data (of):
+listHead --> (dummy, are) --> (are, I) --> (I, of) --> (of, you) --> (you, null)
+
+Insert data (a):
+listHead --> (dummy, a) --> (a, are) --> (are, I) --> (I, of) --> (of, you) --> (you, null)
+
+Insert data (an):
+listHead --> (dummy, a) --> (a, an) --> (an, are) --> (are, I) --> (I, of) --> (of, you) --> (you, null)

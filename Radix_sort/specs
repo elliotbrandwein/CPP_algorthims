@@ -1,0 +1,173 @@
+Project 3.1: Radix Sort strings specifications:
+You are to implement the radix sort as taught in class; however, the data items are strings instead of integers.
+
+************************
+Language: C++
+Due Date: C++ Soft copy: 10/17/2016 Monday before midnight
+Due Date: C++ Hard copy: 10/20/2016 Thursday in class
+
+******************************
+I. Input: a text file contains a list of strings (words).
+       (The name of the input file should be given in argv[1].)
+
+******************************
+II. Output: a text file contains the sorted data in the input file.
+ (The name of the output file should be given in argv[2].)
+
+******************************
+III. Data structure:
+
+- A listNode class:
+        Friend of linkedListStack class
+- Data (string)
+- Next (a node pointer to the next node, initialize to NULL)
+- Constructor to create a new node of a given data and next should be null.
+- Distractor to free a node
+
+- A linkedListStack class:
+         Friend of RadixSort class
+
+- Top // a listNode pointer
+- Constructor // to create a new stack and top initialize to null.
+        - Push // push a node on the top of stack
+        - Pop // pop a node from the top of stack
+        - isEmpty // return 1 if the stack is empty, return 0 otherwise.
+        - printStack // print the data strings from top to the end of the stack.
+
+- A linkedListQueue class
+         Friend of RadixSort class
+
+        - head // a listNode pointer
+        - tail // a listNode pointer
+- Constructor
+// to create a new queue with a dummy node, initially,
+head and tail point to the same dummy node.
+
+        - addTail               // add a node at the tail of the queue
+        - deleteHead            // delete a node from the head of queue
+        - isEmpty               // return 1 if the stack is empty, return 0 otherwise.
+        - printQueue
+
+
+
+- A RadixSort class:
+- tableSize (int) // is 256
+- hashTable[2][size] (linkedListQueue)
+// two hash tables hashTable[0] and hashTable[1]
+                        // where each hashTable has 256 linkedListQueue
+
+- currentTable (int)
+        - previousTable (int) // prints only the none empty queues in the table
+        - longestStringLength (int)
+        - currentDigit (int)
+        - tableIndex (int) // which bucket of the given hash table
+
+        - getVal (char) // returns char of the current digit of the data in the node
+        - hashIndex (val)
+// the hash function which returns table index by either call atoi(val)
+// or cast as (int) val
+- constructors
+// creates two hash tables, and for each hash table you need
+// to create a 256 new linkedListQueue
+
+- printTable (table) // print all none empty queue in the given table
+- padString (node)
+// if the data in the node is shorter than the longestStringLength, padded the string
+// with blanks so that all data have the same string length as the longestStringLength
+// You are to guess which end of the string do we pad the blanks? Try it yourself!!!!
+
+- all other methods you may need for the Radix sort.
+
+******************************
+IV. Algorithm steps:
+******************************
+
+Step 0: inFile <-- open the input file
+        Top <-- create a new stack
+
+Step 1: data <-- read a data from the input file
+        newNode <-- create a new listNode for the data
+push (Top, newNode) <-- push newNode onto the top of the stack
+longestStringLength <-- you need to keep tract of string length of the data here
+
+step 2: repeat step 1 until file is empty
+
+step 3: print the stack
+
+step 4: create hashTable[2][tableSize] // make sure initialize all 256 queues in each hashTable!
+
+Step 5: currentDigit <-- 0 // the first digit/position from the right of the string.
+currentTable <-- 0
+
+Step 6: // move each listNode from stack to hashTable[0]
+- node <-- pop from the stack
+- padString (node) // pad the data in the node to be as long as longestStringLength
+- val <-- getVal (node, currentDigit)
+// get the character from the currentDigit of the data in the node
+
+- hashIndex <-- hashIndex (val) // use atoi(val) or cast as (int) val  to get the  index
+- addTail (hashTable[currentTable][ hashIndex]) // add the node at the tail of the queue at hashTable[currentTable][ hashIndex]
+
+Step 7: repeat step 6 until stack is empty
+Step 8:  printTable (HashTable[currentTable] // print only none empty queue in the table.
+            // See printing format given above.
+
+Step 9:
+- currentDigit++
+- currentTable <-- 1
+- previousTable <-- 0
+- currentQueue <-- 0
+
+Step 10: // moving nodes from previous table to current table
+
+node <-- deleteHead from the currentQueue in
+                        hashTable[previousTable][currentQueue]
+
+ val <-- getVal (node, currentDigit)
+// get the character from the currentDigit of the data in the node
+
+hashIndex <-- hashIndex (val) // use atoi(val) or cast as (int) val to get the index
+
+addTail (hashTable[currentTable][ hashIndex])
+// add the node at the tail of the queue at hashTable[currentTable][ hashIndex]
+
+step 11:  repeat steps 10 until the currentQueue is empty
+
+Step 12: currentQueue ++ // process the next queue in the previous hashTable
+
+ Step 13: repeat step 10 to step 12 until currentQueue >= tableSize - 1
+
+step 14: temp <-- currentTable
+currentTable <-- previousTable
+previousTable <-- temp
+currentQueue <-- 0
+
+Step 15: repeat step 9 to 14 until currentDigit >= longestStringLength.
+
+Step 16: print currentTable // see printing format below
+
+****************************************************
+Print hash table
+****************************************************
+Print only those none empty Queues in the table!
+
+For example if the current Table is 0, and the only none empty queues are 4, 6, 9, 20 and46 then, you
+print as follows:
+Table [0][4]: data , data, data,
+Table [0][6]: data , data, data,
+Table [0][9]: data , data, data,
+Table [0][20]: data , data, data,
+Table [0][46]: data , data, data,
+Etc.
+
+
+
+|=============================================================|
+|    //////       //////   || Dr. Tsaiyun Ishin Phillips      |
+|  //      //    //     // || Professor, Computer Science     |
+| //        //  //         || Queens College, CUNY            |
+| //    //  //  //         || Flushing, NY 11367              |
+| //    //  //  //         || Phone: (718) 997-3524           |
+|  //    ///     //        || Fax  : (718) 997-3513           |
+|   //////////    ///////  || email: yun@image.cs.qc.cuny.edu |
+|=============================================================|

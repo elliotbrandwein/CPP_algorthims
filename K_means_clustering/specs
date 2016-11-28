@@ -1,0 +1,136 @@
+Project: K-means clustering problem
+
+Problem: Given a list of 2-D points in x-y coordinates, and a cluster number, K,
+the task is to partition the input point set to K subsets such that
+points in each subset have the minimum distances to the centroid of their own subset then all other subsets' centroids.
+
+**************************************
+Language:  C++ & Java
+Due date:  C++ soft copy: 10/30/2016 Sunday before Midnight
+Due date:  Java soft copy: 10/31/2016 Monday before Midnight
+Due date:  C++ & Java hard copy: 11/01/2016 Tuesday before in class
+
+*******************************
+I. input/output specifications:
+*******************************
+A. Input (1): a text file.
+/**The name of the input file should be: C++ in argv[1], Java argv[0].
+The first text line is the cluster number, K.
+The second text line is number of points in the data set
+The third text line is the dimension (#of rows and # of columns) of the image, follows by a list of points in x-y coordinates.
+        For example:
+
+                4       // 4 clusters
+                25      // 25 data points
+                40  50  // 40 rows and 50 columns of an image
+                12  30 // the pixel is on row 12 and column 30
+                10  21 // the pixel is on row 10 and column 21
+                :
+                :
+
+B. Output-1: A text file.
+// The name of output-1 file should be: C++ in argv[2], Java argv[1].
+The first text line is the cluster number, K.
+The second text line is number of points in the data set
+The third text line is the dimension (#of rows and # of columns) of the follows by the list of input points plus their cluster IDs.
+For example:
+
+4
+25
+        40  50  // 40 rows and 50 columns of an image
+        12  30  2 // the pixel is on row 12 and column 30 and its cluster ID is 2
+        10  21  1 // the pixel is on row 10 and column 21 and its cluster ID is 1
+                :
+                :
+
+C. Output-2: A series of 2-D images, one per iteration. In the image array, if a pixel has a label, displays with its label, otherwise, display with a blank.
+// The name of output-2 file should be: C++ in argv[3], Java argv[2].
+
+
+
+
+
+*******************************
+III. Data structure:
+*******************************
+- A Point class with following fields:
+- X-coordinate (int)
+- Y-coordinate (int)
+- ClusterID (int)
+- Distance (double) the distance to its own cluster centroid.
+Method:
+ A printPoint method to print the info of a given point
+
+- A K-mean class
+- K (int) // given in the input file
+        - struct of xyCoord
+        - X-coordinate (int)
+        - Y-coordinate (int)
+- Kcentroids[K] (xyCoord) // to be dynamically allocated
+        - numPts (int)
+        - pointSet[numPts] (Point) // to be dynamically allocated
+        - numRow (int)
+        - numCol (int)
+        - imageArray // a 2-D integer array that is dynamically allocated
+
+     Methods:
+- loadPointSet method // read each point from input file and store it onto
+     // the struct pointSet array.
+
+        - assignLable method // assign each point a label from 1 to K
+                                        // sequentially in pointSet array.
+- mapPoint2Image method // read each point from pointSet and its
+// label and map the label on the imageArray.
+
+        - kMeanClustering method
+        - printPointSet
+        - displayImage method // Output the 2-D array of pixels with
+// their labels in output-2 file.
+                                        //(** pixel without label will display as a blank.)
+
+
+*******************************
+IV) kMeanStructering Algorithm
+*******************************
+
+step 0:
+- Open the input file
+- K, numRow, numCol numPts  get from input file.
+- imageArray  Dynamically allocate a 2-D array, size numRows X numCols.
+
+        - pointSet  Dynamically allocate the point set, size of numPts
+        - Kcentroids[K]  Dynamically allocate the K centroids struct.
+
+Step 1: call loadPointSet
+Step 2: call assignLabel
+Step 3: call mapPoint2Image
+Step 4: call displayImage // output to output-2
+4
+step 5: Go thru the entire pointSet struct array to compute the centroids of the K  clusters. Store the centroids in each Kcentroids[i], i from 1 to K.
+(** You should be able to compute the K centroids just go thru the array only once.)
+
+step 6: 6.1: for each point, p, in the pointSet array
+                compute the distance, dist(p,ci), from
+                        p to the centroids of each Kcentroids[i], i = 1 to K
+           6.2: min_i <-- determine which dist(p,ci) is minimum
+
+           6.3: if min_i is not the same as p's old label change p's label to min_i
+                     And changeLabel set to true
+
+step 7: repeat step 6 until all points in pointSet are processed.
+Step 8: repeat step 3 to step 7 until no point changes its label.
+
+Step 9: Output the info of pointSet to Output-1 file.
+
+
+
+
+|=============================================================|
+|    //////       //////   || Dr. Tsaiyun Ishin Phillips      |
+|  //      //    //     // || Professor, Computer Science     |
+| //        //  //         || Queens College, CUNY            |
+| //    //  //  //         || Flushing, NY 11367              |
+| //    //  //  //         || Phone: (718) 997-3524           |
+|  //    ///     //        || Fax  : (718) 997-3513           |
+|   //////////    ///////  || email: yun@image.cs.qc.cuny.edu |
+|=============================================================|

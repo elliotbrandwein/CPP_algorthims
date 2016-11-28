@@ -1,0 +1,194 @@
+Project 7: Partial Ordering, Dependant graph, and scheduling.
+
+Problem statement: Given a directed (dependency) graph, G = <N, E>,
+the problem is to construct a schedule table from the given graph.
+
+As you were taught in the class, there are four cases in the scheduling:
+(1)using limited processors where each job takes only 1 unit of time;
+(2)using un-limited processor where each job takes only 1 unit of time;
+(3)using limited processor where jobs take variable unit of times;
+(4)using un-limited processor where jobs take variable unit of times.
+
+This project is designed to handle all these four casPes. 
+
+What you need to do:
+1) Implement the scheduling algorithm in C++
+2) You will be given a few set of input to test your program.
+3) For each input set, you are to run the program three (3) separate times:
+   one time with 2 processors to procedure schedule table.
+   one time with 5 processors to procedure schedule table, and 
+   one time with 40 processors 
+4) Draw diagram for the data structure and submit the diagram with your hard copy (1st page)
+
+**************************************
+Language: C++
+Due date:  C++ soft copy:  11/30/2016 Wednesday before Midnight
+Due date:  C++ hard copy:  12/1/2016 Thursday in class
+
+*******************************
+I. inputs:
+*******************************
+1) Input-1 (argv[1]): a text file representing the dependency (acyclic) graph, G=<N, E>.
+	The first number in the input file is the number of nodes in the graph; 
+	     then follows by a list of edges (dependency) <ni, nj>.
+		
+	for example:
+    		6		// there are 6 nodes in the input graph
+     		1  2 	// 1 must be done before 2
+    		1  4 	// 1 must be done before 4
+    		4  3 	// 4 must be done before 3
+		4  2 // 4 must be done before 2
+			:
+			:
+2) Input-2 (argv[2]): a text file contains the time requirements for jobs.
+	The first number in the input file is the number of nodes in the graph; 
+	     then follows by a list of pairs, <ni, ti>, where
+		ni is the node id and ti is the unit of times require by ni.
+	
+	for example:
+    		6		// there are 6 nodes in the input graph
+     		1  3 	// job time for node 1 is 3
+    		2  4 	// job time for node 2 is 4
+		3  1 	// job time for node 3 is 1
+			:
+			:
+
+3) Input-3 (argv[3]): number of processors
+	 
+*******************************
+II. Output:
+*******************************
+1) Output (argv[4]): A file containing the result of the schedule table, nicely formatted.
+2) Console output for debugging. 	                  
+
+*******************************
+III. Data structure: Draw diagram for the data structure!!!
+*******************************
+- numJobs (int) 
+- numProcessors (int)
+- totaljobTimes (int)
+- Time (int) // initially set to 0
+
+- processorSchedule (int**) // a 2-D array, (need to be dynamically allocated)
+			// The dimension is (numProcessors + 1) by (totalJobTimes + 1)
+			// prcessorSchedule[i][0],(1st column) os used as availability of processor[i]
+			// initially set to 0
+			// if prcessorSchedule[i][0] <= 0, means processor[i] is not busy, available
+			// if prcessorSchedule[i][0] > 0 , means processor[i] is currently busy, not available.
+      			// if prcessorSchedule[i][Time] == j, means processor[i] is busy on job j.
+
+- graphNode class (a friend of hashNode class)
+    - jobId (int)
+    - next (graphNode *)
+
+- hashNode class  // one entry of the graphHashTable
+   - jobTime (int) 
+   - fatherCount (int) // > 0 means the job still has fathers, 
+			// 0 mean an orphan node;  
+			// -1 means the job is moved to OPEN 
+			// -2 means job is done
+			// initially set to 0
+    - childCount (int)  // initially set to 0
+    - stackTop (graphNode *) // point to a stack linked list, 
+			// initially points to null
+           
+- graphHashTable (hashNode *) // 1-D array of hashNode table, representing the input graph.
+			      // Each entry of the graphHashTable[i].stackTop is pointed to 
+				// a linked list stack of graphNodes 
+				// Stack does not require a dummy node! 
+      
+- OPEN (graphNode *) // it is an ordered linked list, to store orphan jobs, ordered by the jobTime,
+		// if two jobs with the same jobTime, job with more childCount will be in front  
+		// of the job with fewer childCount. 
+		// initially points to null.
+          
+- insert(OPEN, newNode) // OPEN is ordered by the jobTime,
+		// if two jobs with the same jobTime, job with more childCount will be in front 
+		// of the job with fewer childCount. jobTime is stored at graphHashTable[job].jobTime
+
+**************************************************************
+III. Algorithm steps for dependency job scheduling 
+		(Report any error in the algorithm steps below for extra credits!!!!)
+**************************************************************
+
+step 0: - open input-1 (argv[1]) and input-2 (argv[2]) and  output (argv[4])
+        - numJobs <-- get from input1.
+	- numProcessor <-- get from argv[3]
+	- if numProcessor > numJobs
+		 numProcessor <--  numJobs 
+			// There is no need to have more processors than the number of jobs.
+	   
+	- Time <-- 1 
+
+Step 1: graphHashTable <-- dynamically allocated and initialized of all fields
+
+step 2: <ni, nj> <-- read from input-1
+	job <-- ni
+	child <-- nj
+        newNode <-- create a graphNode for <child>
+        push newNode on the top of graphHashTable[index].stackTop
+        graphHashTable[job].childCount ++
+       	graphHashTable[child].fatherCount ++
+
+Step 3: repeat step 2 until input-1 is end of file
+
+step 4: totalJobTime <-- 0
+
+step 5: <job, jobTime> <-- read from input-2
+        graphHashTable[job].jobTime <-- jobTime
+	totalJobTime += jobTime
+
+step 6: repeat step 5 until input-2 is end of file
+
+Step 7: processorSchedule <-- dynamically allocated and initallized
+
+			// The dimension is (numProcessors + 1) by (totalJobTimes + 1)
+			// prcessorSchedule[i][0],(1st column) to be used as availablity of processor[i]
+			// prcessorSchedule[i][0] initially set to 0
+			// i.e.,if prcessorSchedule[i][0] <= 0, means processor[i] is available
+			// if prcessorSchedule[i][0] > 0, means processor[i] is currently busy, not available.
+      			// i prcessorSchedule[i][Time] == j, means processor[i] is busy on job j.
+
+step 8: job <-- 1
+step 9: if graphHashTable[job].fatherCount == 0
+		orphen <-- job	
+		newNode <-- create a graphNode for <orphen>
+ 		insert(OPEN, newNode) // Open is ordered by the jobTime,
+		// if two jobs with the same jobTime, job with more childCount will be in front 
+		// of the job with fewer childCount. jobTime is stored at graphHashTable[job].jobTime
+		graphHashTable[orphen].fatherCount -- // is -1 now,  job is now on the Open
+ 
+step 10: job++
+step 11: repeat step 9 - step 10 while job <= numJobs
+	   
+step 12: processor <-- 1
+step 13: if OPEN is not empty and
+	 if processorSchedule[processor][0] <= 0 // processor is not busy, available
+            availProc <-- processor
+	    processorSchedule[availProc][0]++ // set to busy, un-available
+
+            job <-- remove from Open 
+
+  	    jobTime <-- graphHashTable[job].jobTime
+
+step 14: slot <-- Time
+step 15: processorSchedule[availProc][slot] <-- job
+step 16: slot ++
+step 17: repeat step 15 to step 16 while slot <= Time + jobTime
+
+step 18: processor ++
+
+step 19: repeat step 13 - step 18 while OPEN is *NOT empty* and (processor <= numProcessor) 
+
+step 20: Time++
+
+step 21: processor <-- 1
+step 22: if (processorSchedule[processor][0] > 0) // was busy on a job
+		and (processorSchedule[processor][Time] <= 0) // current job is done
+	    doneJob <-- processorSchedule[processor][Time - 1]
+            graphHashTable[doneJob].fatherCount-- // is equal to  -2 now,  job is done
+  	    processorSchedule[processor][0] <-- 0 // becomes available
+step 23: processor ++
+step 24: repeat step 22 to 23 while processor <= numProcessor
+
+step 25: repeat which steps until what condition? (On your own) 
